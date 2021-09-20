@@ -1,0 +1,20 @@
+{
+    "name": "asd",
+    "description": "asd",
+    "env": {
+        "BOT_TOKEN": {
+            "required": true
+        },
+        "API_ID": {
+            "required": true
+        },
+        "API_HASH": {
+            "required": true
+        }
+    },
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ]
+}
