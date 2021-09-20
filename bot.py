@@ -34,24 +34,16 @@ async def convert(client, message):
     await _info.edit('çevirdik')
     print('\n\n\n', out, err, sep='\n')
     try: 
-        await _info.edit('watermark koyuyom')
-        proc1 = await asyncio.create_subprocess_shell(
-            f"ffmpeg -i {filename}.mp4 -vf \"drawtext=fontfile=./font.ttf:text='Bu video @LinePlayChannels\'a aittir.':fontcolor=white:fontsize=24:x=0:y=0\" -codec:a copy {filename}_watermarked.mp4",
-            stdout=PIPE,
-            stderr=PIPE
-        )
-        await proc1.communicate()
-        
         await _info.edit('thumbnail çekiyom')
         proc2 = await asyncio.create_subprocess_shell(
-            f'ffmpeg -i {filename}_watermarked.mp4 -ss 00:00:00.000 -vframes 1 {filename}.jpg',
+            f'ffmpeg -i {filename}.mp4 -ss 00:00:00.000 -vframes 1 {filename}.jpg',
             stdout=PIPE,
             stderr=PIPE
         )
         await proc2.communicate()
         await _info.edit('duration çekiyom')
         proc3 = await asyncio.create_subprocess_shell(
-            f'ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 {filename}_watermarked.mp4',
+            f'ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 {filename}.mp4',
             stdout=PIPE,
             stderr=STDOUT
         )
@@ -59,9 +51,8 @@ async def convert(client, message):
         await _info.edit('yüklüyom telegrama')
         def progress(current, total):
             print(message.from_user.first_name, ' -> ', current, '/', total, sep='')
-        await client.send_video(message.chat.id, f'{filename}_watermarked.mp4', duration=int(float(duration.decode())), thumb=f'{filename}.jpg', progress=progress)
+        await client.send_video(message.chat.id, f'{filename}.mp4', duration=int(float(duration.decode())), thumb=f'{filename}.jpg', progress=progress)
         os.remove(f'{filename}.mp4')
-        os.remove(f'{filename}_watermarked.mp4')
         os.remove(f'{filename}.jpg')
     except:
         print_exc()
