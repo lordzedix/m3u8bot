@@ -40,7 +40,7 @@ Github Repo: [Click to go.](https://github.com/lambda-stock/m3u8bot/)
     try: 
         await _info.edit('Thumbnail ekleniyor...')
         proc2 = await asyncio.create_subprocess_shell(
-            f'ffmpeg -i {filename}.mp4 -ss 00:00:00.000 -vframes 1 {filename}.jpg',
+            f'ffmpeg -i {filename}.mp4 -ss 00:00:30.000 -vframes 5 {filename}.jpg',
             stdout=PIPE,
             stderr=PIPE
         )
