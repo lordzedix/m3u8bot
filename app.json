@@ -1,6 +1,6 @@
 {
-    "name": "asd",
-    "description": "asd",
+    "name": "Telegram-m3u8-Converter",
+    "description": "A Telegram bot for convert m3u8 files.",
     "env": {
         "BOT_TOKEN": {
             "required": true
