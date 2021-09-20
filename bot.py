@@ -41,4 +41,5 @@ async def convert(client, message):
     else:
         return await _info.edit('sıçtı knk')
 
-    
+
+app.run()
