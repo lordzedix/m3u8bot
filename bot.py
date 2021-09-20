@@ -23,7 +23,7 @@ async def convert(client, message):
         print_exc()
         return await message.reply('kullanım: `/convert m3u8_link`')
     _info = await message.reply('bekle')
-    filename = f'{message.from_user.id}_{time()}.mp4'
+    filename = f'{message.from_user.id}_{int(time())}.mp4'
     proc = await asyncio.create_subprocess_shell(
         f'ffmpeg -i {link} -c copy -bsf:a aac_adtstoasc {filename}',
         stdout=PIPE,
