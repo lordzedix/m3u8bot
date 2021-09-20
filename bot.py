@@ -36,7 +36,7 @@ async def convert(client, message):
     try: 
         await _info.edit('watermark koyuyom')
         proc1 = await asyncio.create_subprocess_shell(
-            f"ffmpeg -i {filename}.mp4 -vf \"drawtext=fontfile=./font.ttf:text='Bu video @LinePlayChannels\'a aittir.':x=0:y=0\" -codec:a copy {filename}_watermarked.mp4",
+            f"ffmpeg -i {filename}.mp4 -vf \"drawtext=fontfile=./font.ttf:text='Bu video @LinePlayChannels\'a aittir.':fontcolor=white:fontsize=24:x=0:y=0\" -codec:a copy {filename}_watermarked.mp4",
             stdout=PIPE,
             stderr=PIPE
         )
