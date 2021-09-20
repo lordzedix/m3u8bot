@@ -23,9 +23,9 @@ async def convert(client, message):
         print_exc()
         return await message.reply('kullanım: `/convert m3u8_link`')
     _info = await message.reply('bekle')
-    filename = f'{message.from_user.id}_{int(time())}.mp4'
+    filename = f'{message.from_user.id}_{int(time())}'
     proc = await asyncio.create_subprocess_shell(
-        f'ffmpeg -i {link} -c copy -bsf:a aac_adtstoasc {filename}',
+        f'ffmpeg -i {link} -c copy -bsf:a aac_adtstoasc {filename}.mp4',
         stdout=PIPE,
         stderr=PIPE
     )
@@ -33,12 +33,20 @@ async def convert(client, message):
     out, err = await proc.communicate()
     await _info.edit('çevirdik')
     print('\n\n\n', out, err, sep='\n')
-    try:
+    try: 
+        await _info.edit('thumbnail çekiyom')
+        proc2 = await asyncio.create_subprocess_shell(
+            f'ffmpeg -i {filename}.mp4 -ss 00:00:00.000 -vframes 1 {filename}.jpg',
+            stdout=PIPE,
+            stderr=PIPE
+        )
+        await proc2.communicate()
         await _info.edit('yüklüyom telegrama')
         def progress(current, total):
             print(message.from_user.first_name, ' -> ', current, '/', total, sep='')
-        return await client.send_video(message.chat.id, filename, progress=progress)
+        return await client.send_video(message.chat.id, f'{filename}.mp4', thumb=f'{filename}.jpg', progress=progress)
     except:
+        print_exc()
         return await _info.edit('sıçtı knk')
 
 
