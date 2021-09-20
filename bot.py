@@ -36,7 +36,7 @@ async def convert(client, message):
     try:
         await _info.edit('yüklüyom telegrama')
         def progress(current, total):
-            print(message.from_user.name, ' -> ', current, '/', total, sep='')
+            print(message.from_user.first_name, ' -> ', current, '/', total, sep='')
         return await client.send_video(message.chat.id, filename, progress=progress)
     except:
         return await _info.edit('sıçtı knk')
