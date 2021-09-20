@@ -35,13 +35,12 @@ async def convert(client, message):
     print('\n\n\n', out, err, sep='\n')
     try: 
         await _info.edit('watermark koyuyom')
-        proc = await asyncio.create_subprocess_shell(
+        proc1 = await asyncio.create_subprocess_shell(
             f"ffmpeg -i {filename}.mp4 -vf \"drawtext=fontfile=./font.ttf:text='Bu video @LinePlayChannels\'a aittir.':x=0:y=0\" -codec:a copy {filename}_watermarked.mp4",
             stdout=PIPE,
             stderr=PIPE
         )
-        await _info.edit('bekle mp4 çeviriyom')
-        await proc.communicate()
+        await proc1.communicate()
         
         await _info.edit('thumbnail çekiyom')
         proc2 = await asyncio.create_subprocess_shell(
