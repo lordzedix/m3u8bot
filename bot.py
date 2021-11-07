@@ -14,7 +14,7 @@ app = Client('m3u8', api_id, api_hash, bot_token=bot_token)
 @app.on_message(filters.command('start'))
 async def start(_, message):
     await message.reply(f'''Kullanım: `/convert m3u8_link`
-Github Repo: [Click to go.](https://github.com/lambda-stock/m3u8bot/)
+Github Repo: [Click to go.](https://t.me/lordzedix)
 ''')
 
 @app.on_message(filters.command(['convert', 'cevir']))
@@ -24,12 +24,12 @@ async def convert(client, message):
     except:
         print_exc()
         return await message.reply(f'''Kullanım: `/convert m3u8_link`
-Github Repo: [Click to go.](https://github.com/lambda-stock/m3u8bot/)
+Github Repo: [Click to go.](https://t.me/lordzedix)
 ''')
     _info = await message.reply('Lütfen bekleyin...')
     filename = f'{message.from_user.id}_{int(time())}'
     proc = await asyncio.create_subprocess_shell(
-        f'ffmpeg -i {link} -c copy -bsf:a aac_adtstoasc {filename}.mp4',
+        f'ffmpeg -i "{link}" -c copy -bsf:a aac_adtstoasc {filename}.mp4',
         stdout=PIPE,
         stderr=PIPE
     )
