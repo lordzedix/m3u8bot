@@ -24,7 +24,7 @@ async def convert(client, message):
     except:
         print_exc()
         return await message.reply(f'''Kullanım: `/convert m3u8_link`
-Github Repo: [Click to go.](https://t.me/lordzedix)
+Admin : [Click to go.](https://t.me/lordzedix)
 ''')
     _info = await message.reply('Lütfen bekleyin...')
     filename = f'{message.from_user.id}_{int(time())}'
@@ -59,7 +59,7 @@ Github Repo: [Click to go.](https://t.me/lordzedix)
             print(message.from_user.first_name, ' -> ', current, '/', total, sep='')
         await client.send_video(message.chat.id, f'{filename}.mp4', duration=int(float(duration.decode())), thumb=f'{filename}.jpg', progress=progress)
         os.remove(f'{filename}.mp4')
-        os.remove(f'https://i.ibb.co/LSnFFkY/IMG-20211110-010456-911.png')
+        os.remove(f'IMG_20211110_010456_911.png')
     except:
         print_exc()
         return await _info.edit('`Bir hata oluştu.`')
