@@ -13,21 +13,23 @@ app = Client('m3u8', api_id, api_hash, bot_token=bot_token)
 
 @app.on_message(filters.command('start'))
 async def start(_, message):
-    await message.reply(f'''Kullanım: `/convert m3u8_link`
+    await message.reply(f'''Kullanım: `/convert m3u8_link||dosya_ismi`
 Github Repo: [Click to go.](https://t.me/lordzedix)
 ''')
 
 @app.on_message(filters.command(['convert', 'cevir']))
 async def convert(client, message):
     try:
-        link = message.text.split(' ', 1)[1]
+        args = message.text.split(' ', 1)[1]
+        link = args.split('||')[0].replace(' ', '')
+        filename = args.split('||')[1].replace(' ', '')
     except:
         print_exc()
-        return await message.reply(f'''Kullanım: `/convert m3u8_link`
+        return await message.reply(f'''Kullanım: `/convert m3u8_link||dosya_ismi`
 Admin : [Click to go.](https://t.me/lordzedix)
 ''')
     _info = await message.reply('Lütfen bekleyin...')
-    filename = f'{message.from_user.id}_{int(time())}'
+    
     proc = await asyncio.create_subprocess_shell(
         f'ffmpeg -i "{link}" -c copy -bsf:a aac_adtstoasc {filename}.mp4',
         stdout=PIPE,
@@ -57,7 +59,7 @@ Admin : [Click to go.](https://t.me/lordzedix)
         await _info.edit("Dosya Telegram'a yükleniyor...")
         def progress(current, total):
             print(message.from_user.first_name, ' -> ', current, '/', total, sep='')
-        await client.send_video(message.chat.id, f'{filename}.mp4', duration=int(float(duration.decode())), thumb=f'{filename}.jpg', progress=progress)
+        await client.send_video(message.chat.id, f'{filename}.mp4', duration=int(float(duration.decode())), thumb=f'{filename}.jpg', file_name=f'{filename}.mp4' progress=progress)
         os.remove(f'{filename}.mp4')
         os.remove(f'{IMG_20211110_010456_911.png}')
     except:
