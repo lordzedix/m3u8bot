@@ -59,7 +59,7 @@ Admin : [Click to go.](https://t.me/lordzedix)
         await _info.edit("Dosya Telegram'a yükleniyor...")
         def progress(current, total):
             print(message.from_user.first_name, ' -> ', current, '/', total, sep='')
-        await client.send_video(message.chat.id, f'{filename}.mp4', duration=int(float(duration.decode())), thumb=f'{filename}.jpg', file_name=f'{filename}.mp4' progress=progress)
+        await client.send_video(message.chat.id, f'{filename}.mp4', duration=int(float(duration.decode())), thumb=f'{filename}.jpg', file_name=f'{filename}.mp4', progress=progress)
         os.remove(f'{filename}.mp4')
         os.remove(f'{IMG_20211110_010456_911.png}')
     except:
