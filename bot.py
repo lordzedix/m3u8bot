@@ -9,12 +9,12 @@ api_id = os.environ['API_ID']
 api_hash = os.environ['API_HASH']
 bot_token = os.environ['BOT_TOKEN']
 
-app = Client('m3u8', api_id, api_hash, bot_token=bot_token)
+app = Client('mkv', api_id, api_hash, bot_token=bot_token)
 
 @app.on_message(filters.command('start'))
 async def start(_, message):
     await message.reply(f'''Kullanım: `/convert m3u8_link||dosya_ismi`
-Github Repo: [Click to go.](https://t.me/lordzedix)
+Admin: [Click to go.](https://t.me/lordzedix)
 ''')
 
 @app.on_message(filters.command(['convert', 'cevir']))
