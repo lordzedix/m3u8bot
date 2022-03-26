@@ -31,7 +31,7 @@ Admin : [Click to go.](https://t.me/lordzedix)
     _info = await message.reply('Lütfen bekleyin...')
     
     proc = await asyncio.create_subprocess_shell(
-        f'ffmpeg -i {link} -c copy -bsf:a aac_adtstoasc {filename}.mp4',
+        f'ffmpeg -i {link} -c copy -vf scale=-1:720 -bsf:a aac_adtstoasc {filename}.mp4',
         stdout=PIPE,
         stderr=PIPE
     )
@@ -42,7 +42,7 @@ Admin : [Click to go.](https://t.me/lordzedix)
     try: 
         await _info.edit('Thumbnail ekleniyor...')
         proc2 = await asyncio.create_subprocess_shell(
-            f'ffmpeg -i {filename}.mp4 -ss 00:01:00.000 -vframes 5 {filename}.jpg',
+            f'ffmpeg -i {filename}.mp4 -ss 00:03:00.000 -vframes 5 {filename}.jpg',
             stdout=PIPE,
             stderr=PIPE
         )
