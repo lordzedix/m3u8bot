@@ -31,7 +31,7 @@ Admin : [Click to go.](https://t.me/lordzedix)
     _info = await message.reply('Lütfen bekleyin...')
     
     proc = await asyncio.create_subprocess_shell(
-        ​f'ffmpeg -i "{link}" -c copy -bsf:a aac_adtstoasc ​{​filename​}​.mp4'​,
+       f'ffmpeg -i "{link}" -c copy -bsf:a aac_adtstoasc {filename}.mp4',
         stdout=PIPE,
         stderr=PIPE
     )
